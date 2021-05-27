@@ -10,5 +10,7 @@ I created this to allow me to migrate from different storage backends for a give
 
 ### Usage
 ```
-oc process -f job-template.yaml SOURCE_PVC=sourcepvc DEST_PVC=destpvc | oc create -f -
+export SOURCE_PVC=/test_src
+export DEST_PVC=/test_dst
+eval "echo '$(cat job-template.yaml)'" | kubectl apply -f -
 ```
