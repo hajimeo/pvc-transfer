@@ -1,8 +1,5 @@
-FROM centos:7
-
-MAINTAINER Ed Seymour <eseymour@redhat.com>
-
-RUN yum install rsync -y && yum clean all -y 
+FROM alpine:latest
+RUN apk add rsync
 
 VOLUME /srcd
 VOLUME /dest

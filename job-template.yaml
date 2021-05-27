@@ -14,7 +14,7 @@ parameters:
 - name: RSYNC_IMAGE
   displayName: Rsync Image Name 
   description: Name of Image to use for running rsync process
-  value: docker-registry.default.svc:5000/openshift/rsync
+  value: alpine:latest
   required: true
 objects:
 - apiVersion: batch/v1
@@ -31,6 +31,8 @@ objects:
         containers:
         - name: rsync
           image: ${RSYNC_IMAGE}
+          command: ["apk"]
+          args: ["add", "rsync"]
           volumeMounts:
           - name: source
             mountPath: /srcd
