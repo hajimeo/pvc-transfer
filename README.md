@@ -14,3 +14,4 @@ export SOURCE_PVC=/test_src
 export DEST_PVC=/test_dst
 eval "echo '$(cat job-template.yaml)'" | kubectl apply -f -
 ```
+TODO: need to execute 'rsync -apvH /srcd/ /dest/' command somehow
