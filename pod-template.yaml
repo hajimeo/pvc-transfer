@@ -6,16 +6,15 @@ spec:
   containers:
     - name: rsync
       image: alpine:latest
-      command: ['apk', 'add', 'rsync']
+      command: ["/bin/sh", "-c"]
+      args:
+        - apk add rsync;
+          while true; do sleep 30; done;
       volumeMounts:
         - name: source
           mountPath: /srcd
         - name: destination
           mountPath: /dest
-      lifecycle:
-        postStart:
-          exec:
-            command: ["/bin/sh"]
   restartPolicy: OnFailure
   volumes:
     - name: source

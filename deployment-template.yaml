@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rsync-deployment
+  labels:
+    app: rsync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rsync
+  template:
+    metadata:
+      labels:
+        app: rsync
+    spec:
+      containers:
+        - name: rsync
+          image: alpine:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - apk add rsync;
+              while true; do sleep 30; done;
+          volumeMounts:
+            - name: source
+              mountPath: /srcd
+            - name: destination
+              mountPath: /dest
+      volumes:
+        - name: source
+          persistentVolumeClaim:
+            claimName: ${SRC_PVC}
+        - name: destination
+          persistentVolumeClaim:
+            claimName: ${DST_PVC}

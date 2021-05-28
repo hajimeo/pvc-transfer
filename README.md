@@ -13,9 +13,8 @@ I created this to allow me to migrate from different storage backends for a give
 kubectl apply -f local-pv.yaml 
 kubectl scale --replicas=0 deployment nexus3-nexus-repository-manager
 
-export SRC_PVC=
-nexus3-nexus-repository-manager-data
+export SRC_PVC=nexus3-nexus-repository-manager-data
 export DST_PVC=local-pv-claim
-kubectl apply -f <(eval 'echo "'$(cat pod-template.yaml)'"')
+kubectl apply -f <(eval "echo \"$(cat pod-template.yaml)\"")
 ```
-TODO: need to execute 'rsync -apvH /srcd/ /dest/' command somehow
+NOTE: Need to be careful about quotes.
