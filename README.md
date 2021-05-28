@@ -16,5 +16,9 @@ kubectl scale --replicas=0 deployment nexus3-nexus-repository-manager
 export SRC_PVC=nexus3-nexus-repository-manager-data
 export DST_PVC=local-pv-claim
 kubectl apply -f <(eval "echo \"$(cat pod-template.yaml)\"")
+
+# Connect to the pad with Shell
+mkdir /dest/nxrm3
+rsync ${RSYNC_OPTS:-"-apvH"} /srcd/ /dest/nxrm3/
 ```
-NOTE: Need to be careful about quotes.
+NOTE: Need to be careful about quotes in xxxx-template.yaml files.
