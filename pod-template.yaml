@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rsync
+spec:
+  containers:
+    - name: rsync
+      image: alpine:latest
+      command: ["apk", "add", "rsync"]
+      volumeMounts:
+        - name: source
+          mountPath: /srcd
+        - name: destination
+          mountPath: /dest
+  restartPolicy: OnFailure
+  volumes:
+    - name: source
+      persistentVolumeClaim:
+        claimName: ${SRC_PVC}
+    - name: destination
+      persistentVolumeClaim:
+        claimName: ${DST_PVC}

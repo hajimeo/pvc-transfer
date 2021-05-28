@@ -12,8 +12,10 @@ spec:
       containers:
         - name: rsync
           image: alpine:latest
-          command: ["apk"]
-          args: ["add", "rsync"]
+          command: ["/bin/sh", "-c"]
+          args:
+            - apk add rsync;
+              rsync ${RSYNC_OPTS:-"-apvH"} /srcd/ /dest/
           volumeMounts:
             - name: source
               mountPath: /srcd
@@ -23,7 +25,7 @@ spec:
       volumes:
         - name: source
           persistentVolumeClaim:
-            claimName: ${SOURCE_PVC}
+            claimName: ${SRC_PVC}
         - name: destination
           persistentVolumeClaim:
-            claimName: ${DEST_PVC}
+            claimName: ${DST_PVC}
