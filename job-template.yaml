@@ -12,10 +12,10 @@ spec:
       containers:
         - name: rsync
           image: alpine:latest
-          command: ["/bin/sh", "-c"]
+          command: ['/bin/sh', '-c']
           args:
             - apk add rsync;
-              rsync ${RSYNC_OPTS:-"-apvH"} /srcd/ /dest/
+              rsync ${RSYNC_OPTS:-"-aHPv"} /srcd/ /dest/
           volumeMounts:
             - name: source
               mountPath: /srcd
