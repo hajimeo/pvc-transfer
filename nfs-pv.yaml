@@ -5,9 +5,8 @@ metadata:
   labels:
     type: nfs
 spec:
-  storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 30Gi
   accessModes:
     - ReadWriteMany
   nfs:
@@ -20,7 +19,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: nfs-pv-claim
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
