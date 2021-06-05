@@ -10,14 +10,14 @@ I created this to allow me to migrate from different storage backends for a give
 
 ### Example
 ```
+kubectl apply -f nfs-pv.yaml
 kubectl apply -f local-pv.yaml 
-kubectl scale --replicas=0 deployment nexus3-nexus-repository-manager
 
-export SRC_PVC=nexus3-nexus-repository-manager-data
+export SRC_PVC=nfs-pv-claim
 export DST_PVC=local-pv-claim
 kubectl apply -f <(eval "echo \"$(cat pod-template.yaml)\"")
 
-# Connect to the pad with Shell
+# Example after connecting to the pad with Shell
 mkdir /dest/nxrm3
 rsync ${RSYNC_OPTS:-"-apvH"} /srcd/ /dest/nxrm3/
 ```
